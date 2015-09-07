@@ -6,6 +6,10 @@
     ThreadController.$inject=[];
     function ThreadController(){
         console.log('ThreadController');
+        var vm=this;
+        vm.hola='hola mundo';
+
     }
+
 
 })();

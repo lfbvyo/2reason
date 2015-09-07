@@ -2,18 +2,20 @@
  * Created by hugo on 07/09/2015.
  */
 (function() {
-    angular.module('app').config('threadStates', threadStates);
-    threadStates.$inject = ['$stateProvider', '$urlRouterProvider'];
+    angular.module('app').config(threadStates, 'threadStates');
+     threadStates.$inject = ['$stateProvider', '$urlRouterProvider'];
      function threadStates($stateProvider, $urlRouterProvider) {
-        //
+
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("/state1");
+        $urlRouterProvider.otherwise("/threads");
         //
         // Now set up the states
         $stateProvider
-            .state('state1', {
-                url: "/state1",
-                templateUrl: "partials/state1.html"
+            .state('thread', {
+                url: "/threads",
+                templateUrl: "app/thread/thread.html",
+                controller: 'ThreadController',
+                controllerAs: 'threadController'
             })
             .state('state1.list', {
                 url: "/list",
@@ -21,10 +23,6 @@
                 controller: function ($scope) {
                     $scope.items = ["A", "List", "Of", "Items"];
                 }
-            })
-            .state('state2', {
-                url: "/state2",
-                templateUrl: "partials/state2.html"
             })
             .state('state2.list', {
                 url: "/list",

@@ -1,1 +1,2 @@
-2reason
+2reason:
+npm install
