@@ -1,12 +1,13 @@
 #2reason:
 
 ## Instalar dependencias
-npm install
+`npm install`
 
 ## Correr proyecto
-node index.js
+`node index.js`
 
 ## Mantener corriendo
-npm install (En el server ya está corriendo)
-forever start index.js
+`npm install forever` (En el server ya está corriendo)
+
+`forever start index.js`
 
