@@ -13,9 +13,9 @@
         $stateProvider
             .state('thread', {
                 url: "/threads",
-                templateUrl: "app/thread/thread.html",
-                controller: 'ThreadController',
-                controllerAs: 'threadController'
+                templateUrl: "app/category/category.html",
+                controller: 'CategoryController',
+                controllerAs: 'categoryController'
             })
             .state('state1.list', {
                 url: "/list",
