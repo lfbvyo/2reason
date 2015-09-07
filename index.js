@@ -74,7 +74,7 @@ app.get('/category/:category_id/:page_num', function(req, res){
 	{'categoria':req.params.category_id},
 	{ comentarios:{$slice:10}},{ limit:globalLimit, skip:globalLimit*req.params.page_num}
 	).toArray(function(err, docs) {
-        res.jsonp(docs); console.log(docs);
+        res.jsonp(docs); 
         db.close();
       });
   });
