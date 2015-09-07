@@ -14,15 +14,8 @@ app.use(express.static('public'));
 
 var url = 'mongodb://localhost:27017/2reason';
 
-
-
-
-//app.get('/', function(req, res){
-//  res.send('Hola Mundo!!');
-//});
-
+// Devuelve las categorias
 app.get('/categories/', function(req, res){
-
   MongoClient.connect(url, function(err, db) {
     if (err) {
       res.end('500: Internal Server Error :p', 500);
@@ -33,6 +26,7 @@ app.get('/categories/', function(req, res){
       });
   });
 });
+// Guarda un nuevo thread en la base de datos 
 app.post('/thread/new', function(req, res){
 	console.log(req.query);
 	MongoClient.connect(url, function(err, db) {
@@ -44,6 +38,19 @@ app.post('/thread/new', function(req, res){
 
 	res.end('Ok');
 });
+// Obtiene los threads de una categoria
+app.get('/category/:category_id/:page_num', function(req, res){
+  MongoClient.connect(url, function(err, db) {
+    if (err) {
+      res.end('500: Internal Server Error :p', 500);
+    }
+    db.collection('threads').find({'categoria':category_id}).toArray(function(err, docs) {
+        res.jsonp(docs);
+        db.close();
+      });
+  });
+});
+
 
 
 app.listen(80);
