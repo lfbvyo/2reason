@@ -7,9 +7,10 @@
         coreUtils.$inject=[];
         function coreUtils(){
             function generateUrl(url,params){
+                params=params||'';
                 return {
-                    url: '/'+url,
-                    method: "GET"
+                    url: 'http://2reason.net/'+url,
+                    params:params
                 };
             }
             return{

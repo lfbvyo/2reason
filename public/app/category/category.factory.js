@@ -6,15 +6,14 @@
         categoryFactory.$inject=['$http','coreUtils'];
         function categoryFactory($http, coreUtils){
             var selectedCategoryId='';
+            var pageNumber=0;
             var threads=[];
             function getCategories(){
                 var request= coreUtils.generateUrl('categories');
-
-                return $http(request).then(
+                return $http.jsonp("http://2reason.net/categories/?callback=JSON_CALLBACK").then(
                     function(response){
                         console.log(response);
-                        return [{"_id":"55ece976c558c4259bb046e6","nombre":"Política","subcategorias":[{"id":1,"nombre":"Corrupción"},{"id":2,"nombre":"Diputados"}]},{"_id":"55ece988c558c4259bb046e7","nombre":"Religión"},{"_id":"55ece993c558c4259bb046e8","nombre":"Amigos"}];
-                        //return response.data;
+                        return response.data;
                     },
                     function(error){
                         console.log(error);
@@ -22,16 +21,18 @@
                 );
             }
             function selectCategory(id){
-                selectedCategoryId=id;
+                if(selectedCategoryId!==id) {
+                    selectedCategoryId = id;
+                    pageNumber = 0;
+                    threads = [];
+                    getMoreThreads();
+                }
             }
-            function getMoreThreads(page){
-                var request= coreUtils.generateUrl('category/id:'+selectedCategoryId+'/'+page);
-                //var request= coreUtils.generateUrl('category',params);
-                return $http(request).then(
+            function getMoreThreads(){
+                return $http.jsonp('http://2reason.net/category/'+selectedCategoryId+'/'+pageNumber+'?callback=JSON_CALLBACK').then(
                     function(response){
-                        threads.push(response);
-                        console.log(response);
-                        //return response.data;
+                        pageNumber++;
+                        threads=threads.concat(response.data);
                     },
                     function(error){
                         console.log(error);
@@ -42,6 +43,7 @@
                 return threads;
             }
             return {
+                getMoreThreads:getMoreThreads,
                 getCategories:getCategories,
                 selectCategory:selectCategory,
                 getThreads:getThreads

@@ -1,3 +1,8 @@
-<h1>hola</h1>
-<div ng-repeat="thread in categoryController.getThreads()">
+
+<div ng-repeat="thread in categoryController.getThreads()" ui-sref="^.thread" ng-click="categoryController.selectThread(_id)">
+    <div style="border-style: solid; border-width: 5px;margin-top:3vh;">
+        <div>{{thread.titulo}}</div><br>
+        <div>{{thread.contenido}}</div>
+    </div>
 </div>
+<button ng-if="categoryController.getThreads().length>0" ng-click="categoryController.getMoreThreads()">Mostrar mas</button>

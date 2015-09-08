@@ -4,13 +4,15 @@
 (
     function(){
         angular.module('app').controller('CategoryController', CategoryController);
-        CategoryController.$inject=['categoryFactory'];
-        function CategoryController(categoryFactory){
+        CategoryController.$inject=['categoryFactory','threadFactory'];
+        function CategoryController(categoryFactory, threadFactory){
             var vm=this;
             vm.categories=[];
             vm.pageNumber=0;
             vm.getCategories=getCategories;
             vm.getThreads=getThreads;
+            vm.getMoreThreads=getMoreThreads;
+            vm.selectThread=selectThread;
             vm.threads=[];
             function getCategories(){
                 categoryFactory.getCategories().then(
@@ -23,15 +25,13 @@
                 );
             }
             function getThreads(){
-                categoryFactory.getThreads().then(
-                    function(threads){
-                        vm.threads.push(threads);
-                        return vm.threads;
-                    },
-                    function(error){
-                        console.log(error);
-                    }
-                );
+                return categoryFactory.getThreads();
+            }
+            function selectThread(id){
+                threadFactory.selectThread(id);
+            }
+            function getMoreThreads(){
+                categoryFactory.getMoreThreads();
             }
 
 

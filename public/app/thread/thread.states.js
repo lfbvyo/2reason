@@ -8,11 +8,11 @@
 
         // Now set up the states
         $stateProvider
-            .state('thread', {
+            .state('app.thread', {
                 url: "/threads",
-                templateUrl: "app/category/category.html",
-                controller: 'CategoryController',
-                controllerAs: 'categoryController'
+                templateUrl: "app/thread/thread.html",
+                controller: 'ThreadController',
+                controllerAs: 'threadController'
             });
         }
     }

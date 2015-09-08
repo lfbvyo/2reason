@@ -8,22 +8,13 @@
 
             // Now set up the states
             $stateProvider
-                .state('category',{
-                    url: "/categories",
-                    views:{
-                        'categories':{
-                            templateUrl: "app/navbar/navbar.html",
-                            controller: 'NavbarController',
-                            controllerAs: 'navbarController'
-                        },
-                        'category':{
-                            templateUrl: "app/category/category.html",
-                            controller: 'CategoryController',
-                            controllerAs: 'categoryController'
-                        }
-                    }
-                }
-            );
+            .state('app.category',{
+                url: "/categories",
+                templateUrl: "app/category/category.html",
+                controller: 'CategoryController',
+                controllerAs: 'categoryController'
+
+            });
         }
     }
 )();

@@ -1,6 +1,6 @@
 <div>
     <nav>
-        <a ng-click="navbarController.selectCategory(category._id)" ng-repeat="category in navbarController.categories">{{category.nombre}}</a>
+        <a ui-sref=".category" ng-click="navbarController.selectCategory(category._id)" ng-repeat="category in navbarController.categories">{{category.nombre}}</a>
     </nav>
 
 </div>
