@@ -6,9 +6,9 @@
         angular.module('app.core').factory('coreUtils',coreUtils);
         coreUtils.$inject=[];
         function coreUtils(){
-            function generateUrl(params){
+            function generateUrl(url,params){
                 return {
-                    url: '/categories',
+                    url: '/'+url,
                     method: "GET"
                 };
             }

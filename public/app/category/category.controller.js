@@ -8,13 +8,25 @@
         function CategoryController(categoryFactory){
             var vm=this;
             vm.categories=[];
+            vm.pageNumber=0;
             vm.getCategories=getCategories;
-            console.log('CategoryController');
-
+            vm.getThreads=getThreads;
+            vm.threads=[];
             function getCategories(){
                 categoryFactory.getCategories().then(
                     function(categories){
                         vm.categories=categories;
+                    },
+                    function(error){
+                        console.log(error);
+                    }
+                );
+            }
+            function getThreads(){
+                categoryFactory.getThreads().then(
+                    function(threads){
+                        vm.threads.push(threads);
+                        return vm.threads;
                     },
                     function(error){
                         console.log(error);
