@@ -4,8 +4,8 @@
 (
     function(){
         angular.module('app').controller('NavbarController', NavbarController);
-        NavbarController.$inject=['categoryFactory'];
-        function NavbarController(categoryFactory){
+        NavbarController.$inject=['categoryFactory', '$state'];
+        function NavbarController(categoryFactory, $state){
             var vm=this;
             vm.categories=[];
             vm.getCategories=getCategories;
@@ -22,7 +22,7 @@
                 );
             }
             function selectCategory(id){
-                categoryFactory.selectCategory(id);
+                $state.go("app.category",{'categoryId':id});
             }
 
 

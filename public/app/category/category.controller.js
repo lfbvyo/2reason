@@ -4,18 +4,24 @@
 (
     function(){
         angular.module('app').controller('CategoryController', CategoryController);
-        CategoryController.$inject=['categoryFactory','threadFactory'];
-        function CategoryController(categoryFactory, threadFactory){
+        CategoryController.$inject=['categoryFactory','threadFactory','$stateParams','$state'];
+        function CategoryController(categoryFactory, threadFactory, $stateParams,$state){
             var vm=this;
+            //variables
+            vm.categoryId=$stateParams.categoryId;
             vm.categories=[];
             vm.pageNumber=0;
+            vm.newThread={};
+            vm.threadForm=false;
+            vm.threads=[];
+            //functions
             vm.getCategories=getCategories;
             vm.getThreads=getThreads;
             vm.getMoreThreads=getMoreThreads;
             vm.selectThread=selectThread;
-            vm.threads=[];
+            vm.createThread=createThread;
             function getCategories(){
-                categoryFactory.getCategories().then(
+                categoryFactory.getCategories(vm.categoryId).then(
                     function(categories){
                         vm.categories=categories;
                     },
@@ -28,13 +34,34 @@
                 return categoryFactory.getThreads();
             }
             function selectThread(id){
-                threadFactory.selectThread(id);
+                $state.go("^.thread",{'threadId':id});
+                //threadFactory.selectThread(id);
             }
             function getMoreThreads(){
-                categoryFactory.getMoreThreads();
+                categoryFactory.getMoreThreads(vm.categoryId, vm.pageNumber).then(
+                    function(response){
+                        vm.pageNumber++;
+                        vm.threads=vm.threads.concat(response);
+                    },
+                    function(){
+
+                    }
+                );
+            }
+            function createThread(){
+                threadFactory.createThread(vm.newThread).then(
+                    function(response){
+                        console.log(response);
+                    },
+                    function(error){
+                        console.log(error);
+                    }
+
+                );
+                console.log(vm.newThread);
             }
 
-
+            vm.getMoreThreads();
             vm.getCategories();
         }
     }

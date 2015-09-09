@@ -9,7 +9,7 @@
         // Now set up the states
         $stateProvider
             .state('app.thread', {
-                url: "/threads",
+                url: "/thread/:threadId",
                 templateUrl: "app/thread/thread.html",
                 controller: 'ThreadController',
                 controllerAs: 'threadController'

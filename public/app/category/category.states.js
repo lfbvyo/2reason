@@ -9,7 +9,7 @@
             // Now set up the states
             $stateProvider
             .state('app.category',{
-                url: "/categories",
+                url: "/category/:categoryId",
                 templateUrl: "app/category/category.html",
                 controller: 'CategoryController',
                 controllerAs: 'categoryController'

@@ -1,3 +1,11 @@
-<div>
-    {{threadController.hola}}
+<div style="border-style: solid; border-width: 5px;margin-top:3vh;">
+    <h1>{{threadController.thread.titulo}}</h1>
+    <h3>{{threadController.thread.autor}}</h3>
+    <p>{{threadController.thread.contenido}}</p>
+    <span>{{threadController.thread.creado}}</span>
+    <div ng-repeat="comment in threadController.thread.comentarios" style="border-style: solid; border-width: 5px;margin-top:3vh; border-color: #000088">
+        <span>{{comment.autor}}</span>
+        <p>{{comment.contenido}}</p>
+        <span>{{comment.creado}}</span>
+    </div>
 </div>

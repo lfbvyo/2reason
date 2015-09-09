@@ -28,25 +28,22 @@
                     getMoreThreads();
                 }
             }
-            function getMoreThreads(){
-                return $http.jsonp('http://2reason.net/category/'+selectedCategoryId+'/'+pageNumber+'?callback=JSON_CALLBACK').then(
+            function getMoreThreads(id, pageNumber){
+                return $http.jsonp('http://2reason.net/category/'+id+'/'+pageNumber+'?callback=JSON_CALLBACK').then(
                     function(response){
-                        pageNumber++;
-                        threads=threads.concat(response.data);
+                        return response.data;
                     },
                     function(error){
                         console.log(error);
                     }
                 );
-            };
+            }
             function getThreads(){
                 return threads;
             }
             return {
                 getMoreThreads:getMoreThreads,
-                getCategories:getCategories,
-                selectCategory:selectCategory,
-                getThreads:getThreads
+                getCategories:getCategories
             };
         }
     }

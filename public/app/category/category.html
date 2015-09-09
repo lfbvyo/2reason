@@ -1,8 +1,17 @@
 
-<div ng-repeat="thread in categoryController.getThreads()" ui-sref="^.thread" ng-click="categoryController.selectThread(_id)">
+<div ng-repeat="thread in categoryController.threads" ng-click="categoryController.selectThread(thread._id)">
     <div style="border-style: solid; border-width: 5px;margin-top:3vh;">
         <div>{{thread.titulo}}</div><br>
         <div>{{thread.contenido}}</div>
     </div>
 </div>
-<button ng-if="categoryController.getThreads().length>0" ng-click="categoryController.getMoreThreads()">Mostrar mas</button>
+<button ng-if="categoryController.threads.length>0" ng-click="categoryController.getMoreThreads()">Mostrar mas</button>
+<button ng-click="categoryController.threadForm=!categoryController.threadForm">Nuevo Thread</button>
+
+<div ng-if="categoryController.threadForm" style="border-style: solid; border-width: 5px;margin-top:3vh;">
+    <span>titulo</span>
+    <input ng-model="categoryController.newThread.titulo" style="width: 100%;"><br>
+    <span>Contenido</span>
+    <input ng-model="categoryController.newThread.contenido" style="width: 100%;">
+    <button ng-click="categoryController.createThread()">Crear</button>
+</div>
