@@ -6,9 +6,12 @@
     ThreadController.$inject=['threadFactory','commentFactory', '$stateParams','$state'];
     function ThreadController(threadFactory, commentFactory, $stateParams,$state){
         var vm=this;
+        vm.threadId=$stateParams.threadId;
         vm.thread={};
+        vm.newComment={};
+        vm.createComment=createComment;
         function getThread(){
-            threadFactory.getThread($stateParams.threadId).then(
+            threadFactory.getThread(vm.threadId).then(
                 function(response){
                     vm.thread=response;
                 },
@@ -17,6 +20,21 @@
 
                 }
 
+            );
+        }
+        function createComment(){
+            threadFactory.createComment(vm.newComment).then(
+                function(response){
+                    if(response.status==200){
+                        alert('comentario creado correctamente');
+                        vm.thread.comentarios.push(vm.newComment);
+                        vm.commentForm=false;
+                        vm.newComment={};
+                    }else{
+                        alert('error');
+                    }
+
+                }
             );
         }
         getThread();

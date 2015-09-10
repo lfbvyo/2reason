@@ -6,7 +6,6 @@
         threadStates.$inject = ['$stateProvider', '$urlRouterProvider'];
         function threadStates($stateProvider, $urlRouterProvider) {
 
-            // Now set up the states
             $stateProvider
             .state('app.category',{
                 url: "/category/:categoryId",

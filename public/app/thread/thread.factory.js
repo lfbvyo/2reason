@@ -26,21 +26,31 @@
                     }
                 );
             }
-            function createThread(thread){
-                return $http.post('http://2reason.net/thread/new/?titulo='+thread.titulo+'&autor=felipevago&contenido='+thread.contenido+'&categoria=55ece993c558c4259bb046e8&callback=JSON_CALLBACK').then(
+            function createThread(thread, categoryId){
+                return $http.post('http://2reason.net/thread/new/?titulo='+thread.titulo+'&autor='+thread.autor+'&contenido='+thread.contenido+'&categoria='+categoryId+'&callback=JSON_CALLBACK').then(
                     function(response){
-                        return response.data;
+                        return response;
                     },
                     function(error){
                         console.log(error);
                     }
                 );
             }
-
+            function createComment(comment, threadId){
+                return $http.post('http://2reason.net/coment/new/'+threadId+'?titulo='+comment.titulo+'&autor='+comment.autor+'&contenido='+comment.contenido+'&callback=JSON_CALLBACK').then(
+                    function(response){
+                        return response;
+                    },
+                    function(error){
+                        return error;
+                    }
+                );
+            }
             return {
                 getMoreThreads:getMoreThreads,
                 getThread:getThread,
-                createThread:createThread
+                createThread:createThread,
+                createComment:createComment
             };
         }
     }

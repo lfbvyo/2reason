@@ -16,7 +16,6 @@
             vm.threads=[];
             //functions
             vm.getCategories=getCategories;
-            vm.getThreads=getThreads;
             vm.getMoreThreads=getMoreThreads;
             vm.selectThread=selectThread;
             vm.createThread=createThread;
@@ -29,9 +28,6 @@
                         console.log(error);
                     }
                 );
-            }
-            function getThreads(){
-                return categoryFactory.getThreads();
             }
             function selectThread(id){
                 $state.go("^.thread",{'threadId':id});
@@ -49,16 +45,19 @@
                 );
             }
             function createThread(){
-                threadFactory.createThread(vm.newThread).then(
+                threadFactory.createThread(vm.newThread, vm.categoryId).then(
                     function(response){
-                        console.log(response);
-                    },
-                    function(error){
-                        console.log(error);
+                        if(response.satus==200) {
+                            alert('thread creado correctamente');
+                            vm.threadForm = false;
+                            vm.threads.push(vm.newThread);
+                            vm.newThread = {};
+                        }else{
+                            alert('error');
+                        }
                     }
 
                 );
-                console.log(vm.newThread);
             }
 
             vm.getMoreThreads();

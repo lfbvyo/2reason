@@ -9,3 +9,13 @@
         <span>{{comment.creado}}</span>
     </div>
 </div>
+<button ng-click="threadController.commentForm=!threadController.commentForm">Nuevo Comentario</button>
+<div ng-if="threadController.commentForm" style="border-style: solid; border-width: 5px;margin-top:3vh;">
+    <span>titulo</span>
+    <input ng-model="threadController.newComment.titulo" style="width: 100%;"><br>
+    <span>Autor</span>
+    <input ng-model="threadController.newComment.autor" style="width: 100%;">
+    <span>Contenido</span>
+    <input ng-model="threadController.newComment.contenido" style="width: 100%;">
+    <button ng-click="threadController.createComment()">Crear</button>
+</div>

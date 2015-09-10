@@ -1,8 +1,13 @@
 
-<div ng-repeat="thread in categoryController.threads" ng-click="categoryController.selectThread(thread._id)">
-    <div style="border-style: solid; border-width: 5px;margin-top:3vh;">
+<div ng-repeat="thread in categoryController.threads" ng-click="categoryController.selectThread(thread._id)" style="border-style: solid; border-width: 5px;margin-top:3vh;">
+    <div >
         <div>{{thread.titulo}}</div><br>
         <div>{{thread.contenido}}</div>
+    </div>
+    <div ng-repeat="comment in thread.comentarios" style="border-style: solid; border-width: 5px;margin-top:3vh; border-color: #000088">
+        <span>{{comment.autor}}</span>
+        <p>{{comment.contenido}}</p>
+        <span>{{comment.creado}}</span>
     </div>
 </div>
 <button ng-if="categoryController.threads.length>0" ng-click="categoryController.getMoreThreads()">Mostrar mas</button>
@@ -11,6 +16,8 @@
 <div ng-if="categoryController.threadForm" style="border-style: solid; border-width: 5px;margin-top:3vh;">
     <span>titulo</span>
     <input ng-model="categoryController.newThread.titulo" style="width: 100%;"><br>
+    <span>Autor</span>
+    <input ng-model="categoryController.newThread.autor" style="width: 100%;">
     <span>Contenido</span>
     <input ng-model="categoryController.newThread.contenido" style="width: 100%;">
     <button ng-click="categoryController.createThread()">Crear</button>

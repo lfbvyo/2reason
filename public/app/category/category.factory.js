@@ -5,9 +5,6 @@
         angular.module('app').factory('categoryFactory',categoryFactory);
         categoryFactory.$inject=['$http','coreUtils'];
         function categoryFactory($http, coreUtils){
-            var selectedCategoryId='';
-            var pageNumber=0;
-            var threads=[];
             function getCategories(){
                 var request= coreUtils.generateUrl('categories');
                 return $http.jsonp("http://2reason.net/categories/?callback=JSON_CALLBACK").then(
@@ -20,14 +17,6 @@
                     }
                 );
             }
-            function selectCategory(id){
-                if(selectedCategoryId!==id) {
-                    selectedCategoryId = id;
-                    pageNumber = 0;
-                    threads = [];
-                    getMoreThreads();
-                }
-            }
             function getMoreThreads(id, pageNumber){
                 return $http.jsonp('http://2reason.net/category/'+id+'/'+pageNumber+'?callback=JSON_CALLBACK').then(
                     function(response){
@@ -37,9 +26,6 @@
                         console.log(error);
                     }
                 );
-            }
-            function getThreads(){
-                return threads;
             }
             return {
                 getMoreThreads:getMoreThreads,
