@@ -1,6 +1,21 @@
-<div>
-    <nav>
-        <a ng-click="navbarController.selectCategory(category._id)" ng-repeat="category in navbarController.categories">{{category.nombre}}</a>
-    </nav>
-
-</div>
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/#/">2Reason</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" collapse="navCollapsed">
+        <ul class="nav navbar-nav">
+            <li ng-repeat="category in navbarController.categories" class="{{category.subcategorias && 'dropdown'}}" >
+                <a  ng-click="navCollapsed = true" ng-href="/#/app/category/{{category._id}}">{{category.nombre}}</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>

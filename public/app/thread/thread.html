@@ -1,21 +1,33 @@
-<div style="border-style: solid; border-width: 5px;margin-top:3vh;">
-    <h1>{{threadController.thread.titulo}}</h1>
-    <h3>{{threadController.thread.autor}}</h3>
-    <p>{{threadController.thread.contenido}}</p>
-    <span>{{threadController.thread.creado}}</span>
-    <div ng-repeat="comment in threadController.thread.comentarios" style="border-style: solid; border-width: 5px;margin-top:3vh; border-color: #000088">
-        <span>{{comment.autor}}</span>
-        <p>{{comment.contenido}}</p>
-        <span>{{comment.creado}}</span>
+<div class="container">
+    <div class="jumbotron">
+        <h1>{{threadController.thread.titulo}} <small>{{threadController.thread.creado| date: 'short'}}</small></h1>
+        <p>{{threadController.thread.contenido}}</p>
+        <ul ng-if="threadController.thread.comentarios.length" class="list-group">
+            <li ng-repeat="comment in threadController.thread.comentarios" class="list-group-item">
+                <span>{{comment.autor}}</span>:
+                {{comment.contenido}}
+                <span class="badge">{{comment.creado| date: short}}</span>
+            </li>
+            <li class="list-group-item">
+                <a class="btn btn-success" ng-click="threadController.commentForm = !threadController.commentForm"> Comentar</a>
+            </li>
+        </ul>
     </div>
-</div>
-<button ng-click="threadController.commentForm=!threadController.commentForm">Nuevo Comentario</button>
-<div ng-if="threadController.commentForm" style="border-style: solid; border-width: 5px;margin-top:3vh;">
-    <span>titulo</span>
-    <input ng-model="threadController.newComment.titulo" style="width: 100%;"><br>
-    <span>Autor</span>
-    <input ng-model="threadController.newComment.autor" style="width: 100%;">
-    <span>Contenido</span>
-    <input ng-model="threadController.newComment.contenido" style="width: 100%;">
-    <button ng-click="threadController.createComment()">Crear</button>
+    <div ng-if="threadController.commentForm" class="well">
+        <form>
+            <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" class="form-control" id="titulo" placeholder="Título" ng-model="threadController.newComment.titulo"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Autor</label>
+                <input type="text" class="form-control" id="Autor" placeholder="Autor" ng-model="threadController.newComment.autor"/>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Contenido</label>
+                <textarea class="form-control" ng-model="threadController.newComment.contenido"></textarea>
+            </div>
+            <button ng-click="threadController.createComment();categoryController.threadForm = !categoryController.threadForm;" class="btn btn-success">Comentar</button>
+        </form>
+    </div>
 </div>
