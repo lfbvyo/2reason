@@ -10,7 +10,3 @@
 `npm install -g forever` (En el server ya está instalado)
 
 `forever start index.js`
-
-## Estilos
-###Documentación
-[Angular Material](https://material.angularjs.org/latest/#/)
