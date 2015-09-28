@@ -25,20 +25,21 @@
     <button ng-show="!categoryController.threadForm" class="btn btn-success" ng-click="categoryController.threadForm = !categoryController.threadForm">Nuevo Thread</button>
 
     <div ng-if="categoryController.threadForm" class="well">
-        <form>
+        <form name="threadForm">
             <div class="form-group">
                 <label for="titulo">Título</label>
-                <input type="text" class="form-control" id="titulo" placeholder="Título" ng-model="categoryController.newThread.titulo"/>
+                <input type="text" class="form-control" id="titulo" placeholder="Título" ng-model="categoryController.newThread.titulo" required/>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Autor</label>
-                <input type="text" class="form-control" id="Autor" placeholder="Autor" ng-model="categoryController.newThread.autor"/>
+                <label for="Autor">Autor</label>
+                <input type="text" placeholder="Anonimo" class="form-control" id="Autor" placeholder="Autor" ng-model="categoryController.newThread.autor"/>
             </div>
             <div class="form-group">
-                <label for="exampleInputFile">Contenido</label>
-                <textarea class="form-control" ng-model="categoryController.newThread.contenido"></textarea>
+                <label for="contenido">Contenido</label>
+                <textarea id="contenido" class="form-control" ng-model="categoryController.newThread.contenido" required></textarea>
             </div>
-            <button ng-click="categoryController.createThread();categoryController.threadForm = !categoryController.threadForm;" class="btn btn-success">Comentar</button>
+
+            <button ng-click="categoryController.createThread();categoryController.threadForm = !categoryController.threadForm;" class="btn btn-success" ng-disabled="threadForm.$invalid">Comentar</button>
         </form>
     </div>
 </div>

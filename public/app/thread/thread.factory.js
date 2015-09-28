@@ -27,7 +27,8 @@
                 );
             }
             function createThread(thread, categoryId){
-                return $http.post('http://2reason.net/thread/new/?titulo='+thread.titulo+'&autor='+thread.autor+'&contenido='+thread.contenido+'&categoria='+categoryId+'&callback=JSON_CALLBACK').then(
+                var autor =thread.autor||'Anonimo';
+                return $http.post('http://2reason.net/thread/new/?titulo='+thread.titulo+'&autor='+autor+'&contenido='+thread.contenido+'&categoria='+categoryId+'&callback=JSON_CALLBACK').then(
                     function(response){
                         return response;
                     },
@@ -37,7 +38,8 @@
                 );
             }
             function createComment(comment, threadId){
-                return $http.post('http://2reason.net/coment/new/'+threadId+'?titulo='+comment.titulo+'&autor='+comment.autor+'&contenido='+comment.contenido+'&callback=JSON_CALLBACK').then(
+                var autor =comment.autor||'Anonimo';
+                return $http.post('http://2reason.net/coment/new/'+threadId+'?titulo='+comment.titulo+'&autor='+autor+'&contenido='+comment.contenido+'&callback=JSON_CALLBACK').then(
                     function(response){
                         return response;
                     },

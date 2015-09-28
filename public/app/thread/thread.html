@@ -14,16 +14,16 @@
         </ul>
     </div>
     <div ng-if="threadController.commentForm" class="well">
-        <form>
+        <form name="commentForm">
             <div class="form-group">
-                <label for="exampleInputPassword1">Autor</label>
-                <input type="text" class="form-control" id="Autor" placeholder="Autor" ng-model="threadController.newComment.autor"/>
+                <label for="autor">Autor</label>
+                <input type="text" class="form-control" id="autor" placeholder="Anonimo" ng-model="threadController.newComment.autor"/>
             </div>
             <div class="form-group">
-                <label for="exampleInputFile">Contenido</label>
-                <textarea class="form-control" ng-model="threadController.newComment.contenido"></textarea>
+                <label  for="contenido">Contenido</label>
+                <textarea id="contenido" class="form-control" ng-model="threadController.newComment.contenido" required></textarea>
             </div>
-            <button ng-click="threadController.createComment();categoryController.threadForm = !categoryController.threadForm;" class="btn btn-success">Comentar</button>
+            <button ng-click="threadController.createComment();categoryController.threadForm = !categoryController.threadForm;" class="btn btn-success" ng-disabled="commentForm.$invalid">Comentar</button>
         </form>
     </div>
 </div>
