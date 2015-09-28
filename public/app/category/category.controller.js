@@ -8,6 +8,7 @@
             function CategoryController(categoryFactory, threadFactory, $stateParams, $state) {
                 var vm = this;
                 //variables
+                vm.category={};
                 vm.categoryId = $stateParams.categoryId;
                 vm.categories = [];
                 vm.pageNumber = 0;
@@ -15,20 +16,10 @@
                 vm.threadForm = false;
                 vm.threads = [];
                 //functions
-                vm.getCategories = getCategories;
                 vm.getMoreThreads = getMoreThreads;
                 vm.selectThread = selectThread;
                 vm.createThread = createThread;
-                function getCategories() {
-                    categoryFactory.getCategories(vm.categoryId).then(
-                            function (categories) {
-                                vm.categories = categories;
-                            },
-                            function (error) {
-                                console.log(error);
-                            }
-                    );
-                }
+                vm.getCategory=getCategory;
                 function selectThread(id) {
                     $state.go("^.thread", {'threadId': id});
                     //threadFactory.selectThread(id);
@@ -59,6 +50,14 @@
 
                     );
                 }
+                function getCategory(){
+                    vm.category= categoryFactory.getCategory(vm.categoryId);
+                    if(vm.category){
+                        return vm.category.nombre;
+                    }else{
+                        return false;
+                    }
+                }
                 vm.open = function (size) {
                     var modalInstance = vm.open({
                         animation: vm.animationsEnabled,
@@ -82,7 +81,7 @@
                     vm.animationsEnabled = !vm.animationsEnabled;
                 };
                 vm.getMoreThreads();
-                vm.getCategories();
+                vm.getCategory();
             }
         }
 )();

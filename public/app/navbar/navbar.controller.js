@@ -9,21 +9,25 @@
             var vm = this;
             vm.navCollapsed=true;
             vm.categories = [];
-            vm.getCategories = getCategories;
-            function getCategories() {
-                categoryFactory.getCategories().then(
+            vm.loadCategories = function loadCategories() {
+                categoryFactory.loadCategories().then(
                     function (categories) {
-                        vm.categories = categories;
+                        vm.getCategories();
                     },
                     function (error) {
                         console.log(error);
                     }
                 );
-            }
+            };
+            vm.getCategories = function getCategories() {
+                vm.categories= categoryFactory.getCategories();
+            };
+
+
             vm.test =function(){
                 vm.navCollapsed=1;
-            }
-            vm.getCategories();
+            };
+            vm.loadCategories();
 
         }
     }

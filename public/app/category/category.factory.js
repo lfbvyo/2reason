@@ -3,20 +3,30 @@
  */
 (function(){
         angular.module('app').factory('categoryFactory',categoryFactory);
-        categoryFactory.$inject=['$http','coreUtils'];
-        function categoryFactory($http, coreUtils){
-            function getCategories(){
+        categoryFactory.$inject=['$http','coreUtils','$filter'];
+        function categoryFactory($http, coreUtils, $filter){
+            var categories=[];
+            function loadCategories(){
                 var request= coreUtils.generateUrl('categories');
                 return $http.jsonp("http://2reason.net/categories/?callback=JSON_CALLBACK").then(
                     function(response){
                         console.log(response);
-                        return response.data;
+                        categories=response.data;
+                        //return response.data;
                     },
                     function(error){
                         console.log(error);
                     }
                 );
             }
+            function getCategories(){
+                return categories;
+            }
+            function getCategory(id){
+                return $filter('filter')(categories, {_id : id})[0];
+            }
+
+
             function getMoreThreads(id, pageNumber){
                 return $http.jsonp('http://2reason.net/category/'+id+'/'+pageNumber+'?callback=JSON_CALLBACK').then(
                     function(response){
@@ -28,8 +38,10 @@
                 );
             }
             return {
+                loadCategories:loadCategories,
                 getMoreThreads:getMoreThreads,
-                getCategories:getCategories
+                getCategories:getCategories,
+                getCategory:getCategory
             };
         }
     }
