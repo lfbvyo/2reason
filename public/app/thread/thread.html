@@ -8,10 +8,11 @@
                 {{comment.contenido}}
                 <span class="badge">{{comment.creado| date: short}}</span>
             </li>
-            <li class="list-group-item">
-                <a class="btn btn-success" ng-click="threadController.commentForm = !threadController.commentForm"> Comentar</a>
-            </li>
+
         </ul>
+    </div>
+    <div class="list-group-item">
+        <a class="btn btn-success" ng-click="threadController.commentForm = !threadController.commentForm"> Nuevo comentario</a>
     </div>
     <div ng-if="threadController.commentForm" class="well">
         <form name="commentForm">

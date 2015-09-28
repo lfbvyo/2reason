@@ -14,10 +14,11 @@
                     {{comment.contenido}}
                     <span class="badge">{{comment.creado| date: short}}</span>
                 </li>
-                <li class="list-group-item">
-                    <a class="btn btn-default" ng-href="/#/app/thread/{{thread._id}}" > Ver todos los comentarios y/o comentar</a>
-                </li>
+
             </ul>
+            <div class="list-group-item">
+                <a class="btn btn-default" ng-href="/#/app/thread/{{thread._id}}" > Ver todos los comentarios y/o comentar</a>
+            </div>
         </div>
     </div>
 
