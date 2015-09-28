@@ -39,7 +39,7 @@
             }
             function createComment(comment, threadId){
                 var autor =comment.autor||'Anonimo';
-                return $http.post('http://2reason.net/coment/new/'+threadId+'?titulo='+comment.titulo+'&autor='+autor+'&contenido='+comment.contenido+'&callback=JSON_CALLBACK').then(
+                return $http.post('http://2reason.net/comment/new/'+threadId+'?autor='+autor+'&contenido='+comment.contenido+'&callback=JSON_CALLBACK').then(
                     function(response){
                         return response;
                     },

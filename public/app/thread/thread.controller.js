@@ -23,7 +23,7 @@
             );
         }
         function createComment(){
-            threadFactory.createComment(vm.newComment).then(
+            threadFactory.createComment(vm.newComment, vm.threadId).then(
                 function(response){
                     if(response.status==200){
                         alert('comentario creado correctamente');
