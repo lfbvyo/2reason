@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 
 
 app.use( bodyParser.json() );       // to support JSON-encoded bodies
@@ -99,5 +99,5 @@ app.get('/thread/:thread_id/:page_num', function(req, res){
 });
 
 
-app.listen(80);
-console.log('En servidor salió corriendo por el puerto 80.')
+app.listen(8085);
+console.log('En servidor esta corriendo por el puerto 8085.')
