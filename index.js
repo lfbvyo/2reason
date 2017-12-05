@@ -1,3 +1,4 @@
+require('newrelic');
 var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
@@ -99,5 +100,5 @@ app.get('/thread/:thread_id/:page_num', function(req, res){
 });
 
 
-app.listen(80);
-console.log('En servidor salió corriendo por el puerto 80.')
+app.listen(3002);
+console.log('En servidor salió corriendo por el puert 3002.')
